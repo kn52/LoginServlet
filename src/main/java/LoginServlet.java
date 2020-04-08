@@ -11,8 +11,8 @@ import java.io.PrintWriter;
 @WebServlet(
     urlPatterns = { "/LoginServlet" },
     initParams = {
-            @WebInitParam( name="usr", value = "user"),
-            @WebInitParam( name="pwd",value = "342")
+            @WebInitParam( name="usr", value = "Asd"),
+            @WebInitParam( name="pwd",value = "Hn@123456")
     })
 public class LoginServlet extends HttpServlet {
 
@@ -25,13 +25,23 @@ public class LoginServlet extends HttpServlet {
         String userPassword=req.getParameter("pwd");
         UserValidation userValidation=new UserValidation();
 
+        String user=getServletConfig().getInitParameter("usr");
+        String pwd=getServletConfig().getInitParameter("password");
+
+
         if(userValidation.validateUserName(userName) && userValidation.validateUserPassword(userPassword)){
-            req.setAttribute("name",userName);
-            req.getRequestDispatcher("jsp/LoginSuccessPage.jsp").forward(req,resp);
+            if(userName.equals(user) && userPassword.equals(pwd)){
+                req.setAttribute("name",userName);
+                req.getRequestDispatcher("jsp/LoginSuccessPage.jsp").forward(req,resp);
+            }
+            else {
+                req.setAttribute("message","Invalid username or password or Register first...");
+                req.getRequestDispatcher("jsp/LoginErrorPage.jsp").forward(req,resp);
+            }
         }
         else{
-            pw.println("Wrong useranme or password");
-            resp.sendRedirect("jsp/LoginPage.jsp");
+            req.setAttribute("message","Enter valid input...");
+            req.getRequestDispatcher("jsp/LoginErrorPage.jsp").forward(req,resp);
         }
         pw.close();
     }
