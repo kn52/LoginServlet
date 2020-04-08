@@ -12,11 +12,11 @@
                     <tr><td></td><td></td><td></td></tr>
                     <tr><td></td><td></td><td></td></tr>
                     <tr><td style="font-size: 15px; color: blue;">Username</td><td></td><td></td></tr>
-                    <tr><td colspan="3"><input type="text" name="name"/></td></tr>
+                    <tr><td colspan="3"><input type="text" name="name" required/></td></tr>
                     <tr><td></td><td></td><td></td></tr>
                     <tr><td></td><td></td><td></td></tr>
                     <tr><td style="font-size: 15px; color: blue;">Password</td><td></td><td></td></tr>
-                    <tr><td colspan="3"><input type="password" name="pwd"/></td></tr>
+                    <tr><td colspan="3"><input type="password" name="pwd" required/></td></tr>
                     <tr><td></td><td></td><td></td></tr>
                     <tr><td align="center" colspan="3"><input type="submit" value="Login"></td></tr>
                     <tr><td></td><td></td><td></td></tr>
