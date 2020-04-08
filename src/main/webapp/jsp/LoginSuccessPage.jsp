@@ -5,8 +5,8 @@
 <body style="background-color: aquamarine;">
 <div>
     <div>
-        <form action="LoginPage.jsp" method="post">
-            <h2 style="color: blue;">Login Successfully....</h2>
+        <form action="jsp/LoginPage.jsp" method="post">
+            <h2 style="color: blue;"><%=request.getAttribute("name")%>Login Successfully....</h2>
             <input type="submit" value="Logout">
         </form>
     </div>

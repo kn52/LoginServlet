@@ -1,3 +1,4 @@
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -14,19 +15,25 @@ import java.io.PrintWriter;
             @WebInitParam( name="pwd",value = "342")
     })
 public class LoginServlet extends HttpServlet {
+    String message="";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter pw=resp.getWriter();
-        pw.println("Hello");
         String userName=req.getParameter("name");
         String userPassword=req.getParameter("pwd");
         String user=getServletConfig().getInitParameter("usr");
         String pwd=getServletConfig().getInitParameter("pwd");
-        if(userName.equals(user) && userPassword.equals(pwd))
+        UserValidation userValidation=new UserValidation();
+        if(userValidation.validateUserName(userName) && userPassword.equals(pwd)){
+            req.setAttribute("name",userName);
             req.getRequestDispatcher("jsp/LoginSuccessPage.jsp").forward(req,resp);
-        else
-            req.getRequestDispatcher("jsp/LoginPage.jsp").include(req,resp);
+        }
+        else{
+            pw.println("Wrong useranme or password");
+            resp.sendRedirect("jsp/LoginPage.jsp");
+        }
+
         pw.close();
     }
 }
