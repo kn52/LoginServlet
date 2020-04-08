@@ -1,9 +1,10 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <link rel="stylesheet" href="../css/loginStyleSheet.css">
     <title>Login Success</title>
 </head>
-<body class="backgroundColor">
+<body style="background-color: aquamarine">
 <div>
     <div>
         <form action="jsp/LoginPage.jsp" method="post">
