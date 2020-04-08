@@ -15,17 +15,17 @@ import java.io.PrintWriter;
             @WebInitParam( name="pwd",value = "342")
     })
 public class LoginServlet extends HttpServlet {
-    String message="";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter pw=resp.getWriter();
+
         String userName=req.getParameter("name");
         String userPassword=req.getParameter("pwd");
-        String user=getServletConfig().getInitParameter("usr");
-        String pwd=getServletConfig().getInitParameter("pwd");
         UserValidation userValidation=new UserValidation();
-        if(userValidation.validateUserName(userName) && userPassword.equals(pwd)){
+
+        if(userValidation.validateUserName(userName) && userValidation.validateUserPassword(userPassword)){
             req.setAttribute("name",userName);
             req.getRequestDispatcher("jsp/LoginSuccessPage.jsp").forward(req,resp);
         }
@@ -33,7 +33,6 @@ public class LoginServlet extends HttpServlet {
             pw.println("Wrong useranme or password");
             resp.sendRedirect("jsp/LoginPage.jsp");
         }
-
         pw.close();
     }
 }
